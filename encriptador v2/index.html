@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador</title>
+    <style>
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			height: 100vh;
+			align-items: center;
+			justify-content: center;
+			background-color: #f2f2f2;
+		}
+		
+		.textarea-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 10px;
+		}
+
+		.textarea {
+			width: 400px;
+			height: 310px;
+			resize: none;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			background-color: white;
+			font-size: 14px;
+			font-family: sans-serif;
+		}
+		
+		.btn {
+			margin: 10px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			font-size: 14px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: background-color 0.3s ease-in-out;
+		}
+
+		.btn:hover {
+			background-color: #3e8e41;
+		}
+		
+		.copy-btn {
+			margin-top: auto;
+			margin-left: auto;
+		}
+	</style>
+</head>
+<body>
+    <div class="container">
+		<div class="textarea-wrapper">
+			<h2>Texto original</h2>
+			<textarea id="textoOriginal" class="textarea" for="textoOriginal"></textarea>
+			<button id="encrypt" class="btn" onclick="encriptar()">Encriptar</button>
+			<button id="decrypt" class="btn" onclick="desencriptar()">Desencriptar</button>
+		</div>
+		<div class="textarea-wrapper">
+			<h2>Texto encriptado/desencriptado</h2>
+			<textarea id="textoEncriptado" class="textarea" for="textoEncriptado"></textarea>
+			<button id="copy" class="btn copy-btn" onclick="copiarTexto()">Copiar</button>
+		</div>
+	</div>
+
+    <script>
+        function encriptarTexto(texto) {
+          texto = texto.replace(/e/g, 'enter');
+          texto = texto.replace(/i/g, 'imes');
+          texto = texto.replace(/a/g, 'ai');
+          texto = texto.replace(/o/g, 'ober');
+          texto = texto.replace(/u/g, 'ufat');
+          return texto;
+        }
+        
+        function desencriptarTexto(textoEncriptado) {
+          textoEncriptado = textoEncriptado.replace(/enter/g, 'e');
+          textoEncriptado = textoEncriptado.replace(/imes/g, 'i');
+          textoEncriptado = textoEncriptado.replace(/ai/g, 'a');
+          textoEncriptado = textoEncriptado.replace(/ober/g, 'o');
+          textoEncriptado = textoEncriptado.replace(/ufat/g, 'u');
+          return textoEncriptado;
+        }
+        
+        function encriptar() {
+          const textoOriginal = document.getElementById('textoOriginal').value;
+          const textoEncriptado = encriptarTexto(textoOriginal);
+          document.getElementById('textoEncriptado').value = textoEncriptado;
+        }
+        
+        function desencriptar() {
+          const textoEncriptado = document.getElementById('textoOriginal').value;
+          const textoOriginal = desencriptarTexto(textoEncriptado);
+          document.getElementById('textoEncriptado').value = textoOriginal;
+        }
+        
+        function copiarTexto() {
+        const textoCopiar = document.getElementById('textoEncriptado').value;
+        navigator.clipboard.writeText(textoCopiar);
+        document.getElementById('textoEncriptado').value = '';
+        document.getElementById('textoOriginal').value = '';
+        alert("¡El Texto ha sido copiado!");
+
+        }
+    </script>
+</body>
+</html>
